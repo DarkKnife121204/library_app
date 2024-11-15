@@ -16,9 +16,9 @@ class DevCommand extends Command
 
     public function handle()
     {
-//        $this->start();
-        $user = User::find(1);
-        dd($user->books->toArray());
+        $this->start();
+//        $user = User::find(1);
+//        dd($user->books->toArray());
     }
 
     public function start()
