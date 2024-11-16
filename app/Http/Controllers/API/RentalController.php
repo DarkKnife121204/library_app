@@ -28,4 +28,9 @@ class RentalController extends Controller
         $rental->fresh();
         return new RentalResource($rental);
     }
+
+    public function book(Rental $rental)
+    {
+        return response()->json($rental->book);
+    }
 }

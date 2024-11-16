@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Author\StoreRequest;
 use App\Http\Requests\Author\UpdateRequest;
 use App\Http\Resources\AuthorResource;
+use App\Http\Resources\BookResource;
 use App\Models\Author;
+use App\Models\Book;
 
 class AuthorController extends Controller
 {
@@ -39,5 +41,10 @@ class AuthorController extends Controller
         return response()->json([
             'message' => 'Worker deleted successfully'
         ]);
+    }
+
+    public function books(Author $author)
+    {
+        return response()->json($author->books);
     }
 }

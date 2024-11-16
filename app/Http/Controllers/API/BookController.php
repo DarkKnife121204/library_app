@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Book\StoreRequest;
 use App\Http\Requests\Book\UpdateRequest;
+use App\Http\Resources\AuthorResource;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
+use App\Models\User;
 
 class BookController extends Controller
 {
@@ -40,5 +42,20 @@ class BookController extends Controller
         return response()->json([
             'message' => 'Worker deleted successfully'
         ]);
+    }
+
+    public function author(Book $book)
+    {
+        return response()->json($book->author);
+    }
+
+    public function rentals(Book $book)
+    {
+        return response()->json($book->rentals);
+    }
+
+    public function users(Book $book)
+    {
+        return response()->json($book->users);
     }
 }
