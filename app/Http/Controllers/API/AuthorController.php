@@ -10,6 +10,11 @@ use App\Models\Author;
 
 class AuthorController extends Controller
 {
+    public function index()
+    {
+        return AuthorResource::collection(Author::all());
+    }
+
     public function show(Author $author)
     {
         return AuthorResource::make($author);

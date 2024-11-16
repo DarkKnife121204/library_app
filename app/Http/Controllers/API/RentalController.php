@@ -10,6 +10,10 @@ use App\Models\Rental;
 
 class RentalController extends Controller
 {
+    public function index()
+    {
+        return RentalResource::collection(Rental::all());
+    }
     public function store(StoreRequest $request)
     {
         $validate = $request->validated();

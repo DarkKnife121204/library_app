@@ -10,6 +10,11 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
+    public function index()
+    {
+        return BookResource::collection(Book::all());
+    }
+
     public function show(Book $book)
     {
         return BookResource::make($book);
