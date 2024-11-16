@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\RentalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,7 @@ Route::post('books',[BookController::class,'store']);
 Route::patch('books/{book}',[BookController::class,'update']);
 
 Route::delete('books/{book}',[BookController::class,'destroy']);
+
+Route::post('rentals',[RentalController::class,'store']);
+
+Route::patch('rentals/{rental}',[RentalController::class,'update']);

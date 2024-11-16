@@ -13,8 +13,8 @@ class AuthorResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'bio' => $this->bio,
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'updated_at' => $this->updated_at->format('Y-m-d'),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
