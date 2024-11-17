@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Author\ShowRequest;
 use App\Http\Requests\Author\StoreRequest;
 use App\Http\Requests\Author\UpdateRequest;
 use App\Http\Resources\AuthorResource;
 use App\Models\Author;
-use App\Models\Book;
 
 class AuthorController extends Controller
 {
@@ -17,10 +15,9 @@ class AuthorController extends Controller
         return AuthorResource::collection(Author::all());
     }
 
-    public function show(ShowRequest $request)
+    public function show(Author $author)
     {
-        $validated = $request->validated();
-        return new AuthorResource($validated);
+        return AuthorResource::make($author);
     }
     public function store(StoreRequest $request)
     {
