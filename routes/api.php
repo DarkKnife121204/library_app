@@ -11,27 +11,11 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('authors',[AuthorController::class,'index']);
-
-Route::get('authors/{author}',[AuthorController::class,'show']);
-
-Route::post('authors',[AuthorController::class,'store']);
-
-Route::patch('authors/{author}',[AuthorController::class,'update']);
-
-Route::delete('authors/{author}',[AuthorController::class,'destroy']);
+Route::resource('authors', AuthorController::class);
 
 Route::get('authors/books/{author}',[AuthorController::class,'books']);
 
-Route::get('books',[BookController::class,'index']);
-
-Route::get('books/{book}',[BookController::class,'show']);
-
-Route::post('books',[BookController::class,'store']);
-
-Route::patch('books/{book}',[BookController::class,'update']);
-
-Route::delete('books/{book}',[BookController::class,'destroy']);
+Route::resource('books', BookController::class);
 
 Route::get('books/author/{book}',[BookController::class,'author']);
 
@@ -39,11 +23,7 @@ Route::get('books/rentals/{book}',[BookController::class,'rentals']);
 
 Route::get('books/users/{book}',[BookController::class,'users']);
 
-Route::get('rentals',[RentalController::class,'index']);
-
-Route::post('rentals',[RentalController::class,'store']);
-
-Route::patch('rentals/{rental}',[RentalController::class,'update']);
+Route::resource('rentals', RentalController::class);
 
 Route::get('rentals/books/{rental}',[RentalController::class,'book']);
 
