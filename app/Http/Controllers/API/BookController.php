@@ -32,7 +32,6 @@ class BookController extends Controller
     {
         $validate = $request->validated();
         $book->update($validate);
-        $book->fresh();
         return new BookResource($book);
     }
 

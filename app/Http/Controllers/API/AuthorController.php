@@ -29,7 +29,6 @@ class AuthorController extends Controller
     {
         $validate = $request->validated();
         $author->update($validate);
-        $author->fresh();
         return new AuthorResource($author);
     }
 

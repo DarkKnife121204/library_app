@@ -25,7 +25,6 @@ class RentalController extends Controller
     {
         $validate = $request->validated();
         $rental->update($validate);
-        $rental->fresh();
         return new RentalResource($rental);
     }
 
