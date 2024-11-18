@@ -21,14 +21,14 @@ class AuthorController extends Controller
     }
     public function store(StoreRequest $request)
     {
-        $validate = $request->validated();
-        $author = Author::create($validate);
+        $validated = $request->validated();
+        $author = Author::create($validated);
         return new AuthorResource($author);
     }
     public function update(UpdateRequest $request, Author $author)
     {
-        $validate = $request->validated();
-        $author->update($validate);
+        $validated = $request->validated();
+        $author->update($validated);
         return new AuthorResource($author);
     }
 

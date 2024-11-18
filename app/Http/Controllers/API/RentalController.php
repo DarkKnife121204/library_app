@@ -16,15 +16,15 @@ class RentalController extends Controller
     }
     public function store(StoreRequest $request)
     {
-        $validate = $request->validated();
-        $rental = Rental::create($validate);
+        $validated = $request->validated();
+        $rental = Rental::create($validated);
         return new RentalResource($rental);
     }
 
     public function update(UpdateRequest $request, Rental $rental)
     {
-        $validate = $request->validated();
-        $rental->update($validate);
+        $validated = $request->validated();
+        $rental->update($validated);
         return new RentalResource($rental);
     }
 

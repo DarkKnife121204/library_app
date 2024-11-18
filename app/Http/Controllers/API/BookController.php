@@ -23,15 +23,15 @@ class BookController extends Controller
     }
     public function store(StoreRequest $request)
     {
-        $validate = $request->validated();
-        $author = Book::create($validate);
+        $validated = $request->validated();
+        $author = Book::create($validated);
         return new BookResource($author);
     }
 
     public function update(UpdateRequest $request, Book $book)
     {
-        $validate = $request->validated();
-        $book->update($validate);
+        $validated = $request->validated();
+        $book->update($validated);
         return new BookResource($book);
     }
 
