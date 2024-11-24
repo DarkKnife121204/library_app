@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Book\StoreRequest;
-use App\Http\Requests\Book\UpdateRequest;
+use App\Http\Requests\BookStoreRequest;
+use App\Http\Requests\BookUpdateRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\JsonResponse;
@@ -21,14 +21,14 @@ class BookController extends Controller
     {
         return BookResource::make($book);
     }
-    public function store(StoreRequest $request): BookResource
+    public function store(BookStoreRequest $request): BookResource
     {
         $validated = $request->validated();
         $author = Book::create($validated);
         return new BookResource($author);
     }
 
-    public function update(UpdateRequest $request, Book $book): BookResource
+    public function update(BookUpdateRequest $request, Book $book): BookResource
     {
         $validated = $request->validated();
         $book->update($validated);

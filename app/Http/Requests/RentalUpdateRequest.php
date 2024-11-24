@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Rental;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class RentalUpdateRequest extends FormRequest
 {
     public function rules(): array
     {

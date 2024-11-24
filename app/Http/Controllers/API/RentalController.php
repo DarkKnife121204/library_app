@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rental\StoreRequest;
-use App\Http\Requests\Rental\UpdateRequest;
+use App\Http\Requests\RentalStoreRequest;
+use App\Http\Requests\RentalUpdateRequest;
 use App\Http\Resources\RentalResource;
 use App\Models\Rental;
 use Illuminate\Http\JsonResponse;
@@ -16,14 +16,14 @@ class RentalController extends Controller
     {
         return RentalResource::collection(Rental::all());
     }
-    public function store(StoreRequest $request): RentalResource
+    public function store(RentalStoreRequest $request): RentalResource
     {
         $validated = $request->validated();
         $rental = Rental::create($validated);
         return new RentalResource($rental);
     }
 
-    public function update(UpdateRequest $request, Rental $rental): RentalResource
+    public function update(RentalUpdateRequest $request, Rental $rental): RentalResource
     {
         $validated = $request->validated();
         $rental->update($validated);

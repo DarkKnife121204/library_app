@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Author;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class AuthorStoreRequest extends FormRequest
 {
     public function rules(): array
     {
