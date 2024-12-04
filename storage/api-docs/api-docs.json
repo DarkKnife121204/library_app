@@ -139,7 +139,7 @@
                 "operationId": "1385946b5672597ae606be36ff9a4a70",
                 "parameters": [
                     {
-                        "name": "post",
+                        "name": "author",
                         "in": "path",
                         "description": "ID автора",
                         "required": true,
@@ -185,6 +185,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             },
@@ -192,11 +195,11 @@
                 "tags": [
                     "Authors"
                 ],
-                "summary": "Удаление",
+                "summary": "Удалить",
                 "operationId": "245c566f6811d917464ab90724195009",
                 "parameters": [
                     {
-                        "name": "delete",
+                        "name": "destroy",
                         "in": "path",
                         "description": "ID автора",
                         "required": true,
@@ -219,6 +222,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             },
@@ -299,6 +305,74 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/authors/books/{author}": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Книги автора",
+                "operationId": "5601dc5e17cd61719197c0f01b63bf18",
+                "parameters": [
+                    {
+                        "name": "author",
+                        "in": "path",
+                        "description": "ID автора",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "author_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "published_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2012-11-25"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-24T14:38:49.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-24T14:38:49.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }

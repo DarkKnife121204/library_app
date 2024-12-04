@@ -63,7 +63,7 @@ use App\Http\Controllers\Controller;
  *       @OA\Parameter(
  *           description="ID автора",
  *           in="path",
- *           name="post",
+ *           name="author",
  *           required=true,
  *           example=1
  *       ),
@@ -80,6 +80,10 @@ use App\Http\Controllers\Controller;
  *                     @OA\Property(property="updated_at", type="date", example="2024-11-24T14:38:49.000000Z"),
  *              ),
  *          ),
+ *       ),
+ *       @OA\Response(
+ *           response=404,
+ *           description="Not Found",
  *       ),
  *   ),
  *
@@ -120,17 +124,21 @@ use App\Http\Controllers\Controller;
  *                ),
  *            ),
  *       ),
+ *       @OA\Response(
+ *           response=404,
+ *           description="Not Found",
+ *       ),
  *    ),
  *
  * @OA\Delete(
  *        path="/api/authors/{author}",
- *        summary="Удаление",
+ *        summary="Удалить",
  *        tags={"Authors"},
  *
  *        @OA\Parameter(
  *            description="ID автора",
  *            in="path",
- *            name="delete",
+ *            name="destroy",
  *            required=true,
  *            example=1
  *        ),
@@ -142,8 +150,42 @@ use App\Http\Controllers\Controller;
  *               @OA\Property(property="message", type="string", example="Worker deleted successfully"),
  *           ),
  *        ),
+ *        @OA\Response(
+ *            response=404,
+ *            description="Not Found",
+ *        ),
  *    ),
  *
+ * @OA\Get(
+ *         path="/api/authors/books/{author}",
+ *         summary="Книги автора",
+ *         tags={"Authors"},
+ *
+ *         @OA\Parameter(
+ *             description="ID автора",
+ *             in="path",
+ *             name="author",
+ *             required=true,
+ *             example=1
+ *         ),
+ *
+ *         @OA\Response(
+ *             response=200,
+ *             description="OK",
+ *             @OA\JsonContent( type="array", @OA\Items(
+ *                 @OA\Property(property="id", type="integer", example=1),
+ *                 @OA\Property(property="title", type="string", example="Some title"),
+ *                 @OA\Property(property="author_id", type="integer", example=1),
+ *                 @OA\Property(property="published_at", type="date", example="2012-11-25"),
+ *                 @OA\Property(property="created_at", type="date", example="2024-11-24T14:38:49.000000Z"),
+ *                 @OA\Property(property="updated_at", type="date", example="2024-11-24T14:38:49.000000Z"),
+ *                )),
+ *         ),
+ *         @OA\Response(
+ *            response=404,
+ *            description="Not Found",
+ *         ),
+ *     ),
  */
 class AuthorController extends Controller
 {
