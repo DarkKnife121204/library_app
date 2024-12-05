@@ -909,6 +909,352 @@
                     }
                 }
             }
+        },
+        "/api/rentals": {
+            "get": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Список",
+                "operationId": "a3f7d2092bd6c52f99481fcc9fc3d6f6",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "book_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "rented_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-11-21"
+                                                    },
+                                                    "due_date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-12-06"
+                                                    },
+                                                    "return_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "null"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-11-24T14:38:49.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-11-24T14:38:49.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Создание",
+                "operationId": "b4a8c9b75e8dbe8042b7eaa38ec98bd9",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer",
+                                                "example": 2
+                                            },
+                                            "book_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "rented_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-21"
+                                            },
+                                            "due_date": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-12-06"
+                                            },
+                                            "return_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "null"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "book_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "rented_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-21"
+                                                },
+                                                "due_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-12-06"
+                                                },
+                                                "return_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "null"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rentals/{rentals}": {
+            "patch": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Обновление",
+                "operationId": "cbd0e3e21af032fe2516aa71a3319cce",
+                "parameters": [
+                    {
+                        "name": "patсh",
+                        "in": "path",
+                        "description": "ID аренды",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer",
+                                                "example": 2
+                                            },
+                                            "book_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "rented_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-21"
+                                            },
+                                            "due_date": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-12-06"
+                                            },
+                                            "return_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "null"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "book_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "rented_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-21"
+                                                },
+                                                "due_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-12-06"
+                                                },
+                                                "return_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "null"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/rentals/books/{rental}": {
+            "get": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Книга из аренды",
+                "operationId": "d6bd8f81f1dee30f17be1106587dfdd9",
+                "parameters": [
+                    {
+                        "name": "author",
+                        "in": "path",
+                        "description": "ID аренды",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Some title"
+                                        },
+                                        "author_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "published_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2012-11-25"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-11-24T14:38:49.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-11-24T14:38:49.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -919,6 +1265,10 @@
         {
             "name": "Books",
             "description": "Books"
+        },
+        {
+            "name": "Rentals",
+            "description": "Rentals"
         }
     ]
 }
