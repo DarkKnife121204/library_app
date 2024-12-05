@@ -1255,6 +1255,68 @@
                     }
                 }
             }
+        },
+        "/api/user/books/{user}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Книга арендованная пользователем",
+                "operationId": "01cadccce502f31b6decbc228adf0cdf",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Some title"
+                                        },
+                                        "author_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "published_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2012-11-25"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-11-24T14:38:49.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-11-24T14:38:49.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -1269,6 +1331,10 @@
         {
             "name": "Rentals",
             "description": "Rentals"
+        },
+        {
+            "name": "User",
+            "description": "User"
         }
     ]
 }
