@@ -12,7 +12,7 @@
                     "Authors"
                 ],
                 "summary": "Список",
-                "operationId": "938a09235858de1550d30392a4f18b01",
+                "operationId": "be68aa64058e29169345590ef50213d8",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -63,7 +63,7 @@
                     "Authors"
                 ],
                 "summary": "Создание",
-                "operationId": "de447986509fc7e3789f8782d8347608",
+                "operationId": "bcab5786e00765bc5a28d96b6ec4f48b",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -136,7 +136,7 @@
                     "Authors"
                 ],
                 "summary": "Просмотр",
-                "operationId": "1385946b5672597ae606be36ff9a4a70",
+                "operationId": "13c2a81fa6f28d2b4c6f11b375c01258",
                 "parameters": [
                     {
                         "name": "author",
@@ -196,7 +196,7 @@
                     "Authors"
                 ],
                 "summary": "Удалить",
-                "operationId": "245c566f6811d917464ab90724195009",
+                "operationId": "dd7ad00391cba1f67c97ca7cc2aca01c",
                 "parameters": [
                     {
                         "name": "destroy",
@@ -215,7 +215,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Worker deleted successfully"
+                                            "example": "Author deleted successfully"
                                         }
                                     },
                                     "type": "object"
@@ -233,7 +233,7 @@
                     "Authors"
                 ],
                 "summary": "Обновление",
-                "operationId": "37a14cdc012b25442bf5a1f9c53bfe6c",
+                "operationId": "b96ef33e375a5e6260763a428a819b59",
                 "parameters": [
                     {
                         "name": "patсh",
@@ -318,7 +318,7 @@
                     "Authors"
                 ],
                 "summary": "Книги автора",
-                "operationId": "5601dc5e17cd61719197c0f01b63bf18",
+                "operationId": "a6b2b21b59aa38f821141b207fd9acd2",
                 "parameters": [
                     {
                         "name": "author",
@@ -376,12 +376,549 @@
                     }
                 }
             }
+        },
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Список",
+                "operationId": "31bd209f731f96fbf72021f67a262472",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Some title"
+                                                    },
+                                                    "author_id": {
+                                                        "type": "integer",
+                                                        "example": 12
+                                                    },
+                                                    "published_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "1994-09-03"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-11-24T14:38:49.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-11-24T14:38:49.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Создание",
+                "operationId": "eaabd90067e93554d9eaa480d67aaae6",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "author_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "published_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-12-12"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "published_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-12-12"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/{books}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Просмотр",
+                "operationId": "636fe794d50ae966f75b026770731206",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "published_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-12-12"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Удалить",
+                "operationId": "06cb9f50f2f4b53391738b251a3fea51",
+                "parameters": [
+                    {
+                        "name": "destroy",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Обновление",
+                "operationId": "c98516f41dd75bcd88a2c431e2049f27",
+                "parameters": [
+                    {
+                        "name": "patсh",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Some some title"
+                                            },
+                                            "author_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "published_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-12-12"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some some title"
+                                                },
+                                                "author_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "published_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-12-12"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-24T14:38:49.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/books/author/{books}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Автор книги",
+                "operationId": "32adca6743927f476e416d8bee0e6070",
+                "parameters": [
+                    {
+                        "name": "Book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Some some name"
+                                        },
+                                        "bio": {
+                                            "type": "string",
+                                            "example": "Some some bio"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-11-24T14:38:49.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-11-24T14:38:49.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/books/rentals/{book}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Аренды книги",
+                "operationId": "26c41800d892c7d7a06399d62936b75f",
+                "parameters": [
+                    {
+                        "name": "Book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "user_id": {
+                                                "type": "integer",
+                                                "example": 2
+                                            },
+                                            "book_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "rented_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-21"
+                                            },
+                                            "due_date": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-12-06"
+                                            },
+                                            "return_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": null
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-24T14:38:49.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-24T14:38:49.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/books/users/{book}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Пользователь книги",
+                "operationId": "8c87587fb43872d339a292eeb1c29d76",
+                "parameters": [
+                    {
+                        "name": "Book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Enid Trantow"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "pbernhard@example.com"
+                                            },
+                                            "email_verified_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-24T14:38:49.000000Z"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-24T14:38:49.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-11-24T14:38:49.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Authors",
             "description": "Authors"
+        },
+        {
+            "name": "Books",
+            "description": "Books"
         }
     ]
 }
