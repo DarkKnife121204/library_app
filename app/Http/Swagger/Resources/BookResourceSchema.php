@@ -23,14 +23,14 @@ class BookResourceSchema
     public int $author_id;
 
     /**
-     * @OA\Property (example="2024-11-24T14:38:49.000000Z")
+     * @OA\Property (example="2024-11-24")
      */
-    public string $created_at;
+    public string $published_at;
 
     /**
      * @OA\Property (example="2024-11-24T14:38:49.000000Z")
      */
-    public string $published_at;
+    public string $created_at;
 
     /**
      * @OA\Property (example="2024-11-24T14:38:49.000000Z")
