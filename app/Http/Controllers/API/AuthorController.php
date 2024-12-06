@@ -19,13 +19,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *           response=200,
  *           description="OK",
  *           @OA\JsonContent(
- *               @OA\Property(property="data", type="array", @OA\Items(
- *                   @OA\Property(property="id", type="integer", example=1),
- *                   @OA\Property(property="name", type="string", example="Some name"),
- *                   @OA\Property(property="bio", type="string", example="Some bio"),
- *                   @OA\Property(property="created_at", type="date", example="2024-11-24T14:38:49.000000Z"),
- *                   @OA\Property(property="updated_at", type="date", example="2024-11-24T14:38:49.000000Z"),
- *               )),
+ *               @OA\Property(property="data", type="array",@OA\Items(@OA\Schema(ref="#/components/schemas/AuthorResourceSchema"))),
  *           ),
  *       ),
  *   ),
@@ -38,10 +32,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\RequestBody(
  *         @OA\JsonContent(
  *             allOf={
- *                 @OA\Schema(
- *                     @OA\Property(property="name", type="string", example="Some name"),
- *                     @OA\Property(property="bio", type="string", example="Some bio"),
- *                 )
+ *                 @OA\Schema(ref="#/components/schemas/AuthorStoreRequestSchema")
  *             }
  *         )
  *     ),

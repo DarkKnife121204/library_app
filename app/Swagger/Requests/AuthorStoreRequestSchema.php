@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Swagger\Requests;
+namespace App\Swagger\Requests;
 /**
  * @OA\Schema (required={"name", "bio"})
  */
@@ -12,7 +12,7 @@ class AuthorStoreRequestSchema
     public string $name;
 
     /**
-     * @OA\Property (exmaple="bio")
+     * @OA\Property (example="bio")
      */
     public string $bio;
 }

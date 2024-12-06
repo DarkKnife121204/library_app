@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Swagger\Resources;
+namespace App\Swagger\Resources;
 /**
  * @OA\Schema (),
  */
-class AuthorResourceSchema
+class BookResourceSchema
 {
     /**
      * @OA\Property (example=1),
@@ -12,15 +12,20 @@ class AuthorResourceSchema
     public int $id;
 
     /**
-     * @OA\Property (example="name"),
+     * @OA\Property (example="title"),
      */
-    public string $name;
+    public string $title;
 
     /**
-     * @OA\Property (example="bio")
+     * @OA\Property (example=1)
      */
 
-    public string $bio;
+    public int $author_id;
+
+    /**
+     * @OA\Property (example="2024-11-24")
+     */
+    public string $published_at;
 
     /**
      * @OA\Property (example="2024-11-24T14:38:49.000000Z")

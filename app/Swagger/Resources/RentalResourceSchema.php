@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Swagger\Resources;
+namespace App\Swagger\Resources;
 /**
  * @OA\Schema (),
  */

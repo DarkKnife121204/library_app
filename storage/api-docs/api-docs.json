@@ -22,33 +22,7 @@
                                     "properties": {
                                         "data": {
                                             "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "name": {
-                                                        "type": "string",
-                                                        "example": "Some name"
-                                                    },
-                                                    "bio": {
-                                                        "type": "string",
-                                                        "example": "Some bio"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "format": "date",
-                                                        "example": "2024-11-24T14:38:49.000000Z"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date",
-                                                        "example": "2024-11-24T14:38:49.000000Z"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
+                                            "items": {}
                                         }
                                     },
                                     "type": "object"
@@ -70,17 +44,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "properties": {
-                                            "name": {
-                                                "type": "string",
-                                                "example": "Some name"
-                                            },
-                                            "bio": {
-                                                "type": "string",
-                                                "example": "Some bio"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/AuthorStoreRequestSchema"
                                     }
                                 ]
                             }
@@ -1316,6 +1280,218 @@
                         "description": "Not Found"
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AuthorStoreRequestSchema": {
+                "required": [
+                    "name",
+                    "bio"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": "bio"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthorUpdateRequestSchema": {
+                "required": [
+                    "name",
+                    "bio"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": "bio"
+                    }
+                },
+                "type": "object"
+            },
+            "BookStoreRequestSchema": {
+                "required": [
+                    "name",
+                    "bio",
+                    "published_at"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": "bio"
+                    },
+                    "published_at": {
+                        "type": "string",
+                        "example": "2024-11-24"
+                    }
+                },
+                "type": "object"
+            },
+            "BookUpdateRequestSchema": {
+                "required": [
+                    "name",
+                    "bio",
+                    "published_at"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": "bio"
+                    },
+                    "published_at": {
+                        "type": "string",
+                        "example": "2024-11-24"
+                    }
+                },
+                "type": "object"
+            },
+            "RentalStoreRequestSchema": {
+                "required": [
+                    "user_id",
+                    "book_id",
+                    "rented_at",
+                    "due_date"
+                ],
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "book_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "rented_at": {
+                        "type": "string",
+                        "example": "2024-11-24"
+                    },
+                    "due_date": {
+                        "type": "string",
+                        "example": "2024-11-30"
+                    }
+                },
+                "type": "object"
+            },
+            "RentalUpdateRequestSchema": {
+                "required": [
+                    "return_at"
+                ],
+                "properties": {
+                    "return_at": {
+                        "type": "string",
+                        "example": "null"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthorResourceSchema": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": "bio"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "BookResourceSchema": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "title"
+                    },
+                    "author_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "published_at": {
+                        "type": "string",
+                        "example": "2024-11-24"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "RentalResourceSchema": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "book_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "rented_at": {
+                        "type": "string",
+                        "example": "2024-12-06"
+                    },
+                    "due_date": {
+                        "type": "string",
+                        "example": "2024-12-12"
+                    },
+                    "return_at": {
+                        "type": "string",
+                        "example": "null"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    }
+                },
+                "type": "object"
             }
         }
     },
