@@ -38,13 +38,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *
  *     @OA\RequestBody(
  *         @OA\JsonContent(
- *             allOf={
- *                 @OA\Schema(
- *                     @OA\Property(property="title", type="string", example="Some title"),
- *                     @OA\Property(property="author_id", type="integer", example=1),
- *                     @OA\Property(property="published_at", type="date", example="2024-12-12"),
- *                 )
- *             }
+ *             allOf={@OA\Schema(ref="#/components/schemas/BookStoreRequestSchema")}
  *         )
  *     ),
  *
@@ -54,7 +48,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="object",
  *                    @OA\Property(property="id", type="integer", example=1),
- *                    @OA\Property(property="title", type="string", example="Some title"),
+ *                    @OA\Property(property="title", type="string", example="title"),
  *                    @OA\Property(property="author_id", type="integer", example=1),
  *                    @OA\Property(property="published_at", type="date", example="2024-12-12"),
  *                    @OA\Property(property="created_at", type="date", example="2024-11-24T14:38:49.000000Z"),
@@ -112,13 +106,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *
  *        @OA\RequestBody(
  *            @OA\JsonContent(
- *                allOf={
- *                    @OA\Schema(
- *                      @OA\Property(property="title", type="string", example="Some some title"),
- *                      @OA\Property(property="author_id", type="integer", example=1),
- *                      @OA\Property(property="published_at", type="date", example="2024-12-12"),
- *                    )
- *                }
+ *                allOf={@OA\Schema(ref="#/components/schemas/BookUpdateRequestSchema")}
  *            )
  *        ),
  *
@@ -128,7 +116,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *            @OA\JsonContent(
  *                @OA\Property(property="data", type="object",
  *                      @OA\Property(property="id", type="integer", example=1),
- *                      @OA\Property(property="title", type="string", example="Some some title"),
+ *                      @OA\Property(property="title", type="string", example="title"),
  *                      @OA\Property(property="author_id", type="integer", example=1),
  *                      @OA\Property(property="published_at", type="date", example="2024-12-12"),
  *                      @OA\Property(property="created_at", type="date", example="2024-11-24T14:38:49.000000Z"),

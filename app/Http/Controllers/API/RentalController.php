@@ -21,10 +21,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *           @OA\JsonContent(
  *               @OA\Property(property="data", type="array", @OA\Items(
  *                   @OA\Property(property="id", type="integer", example=1),
- *                   @OA\Property(property="user_id", type="integer", example=2),
+ *                   @OA\Property(property="user_id", type="integer", example=1),
  *                   @OA\Property(property="book_id", type="integer", example=1),
- *                   @OA\Property(property="rented_at", type="date", example="2024-11-21"),
- *                   @OA\Property(property="due_date", type="date", example="2024-12-06"),
+ *                   @OA\Property(property="rented_at", type="date", example="2024-11-24"),
+ *                   @OA\Property(property="due_date", type="date", example="2024-11-30"),
  *                   @OA\Property(property="return_at", type="date", example="null"),
  *                   @OA\Property(property="created_at", type="date", example="2024-11-24T14:38:49.000000Z"),
  *                   @OA\Property(property="updated_at", type="date", example="2024-11-24T14:38:49.000000Z"),
@@ -41,13 +41,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\RequestBody(
  *         @OA\JsonContent(
  *             allOf={
- *                 @OA\Schema(
- *                     @OA\Property(property="user_id", type="integer", example=2),
- *                     @OA\Property(property="book_id", type="integer", example=1),
- *                     @OA\Property(property="rented_at", type="date", example="2024-11-21"),
- *                     @OA\Property(property="due_date", type="date", example="2024-12-06"),
- *                     @OA\Property(property="return_at", type="date", example="null"),
- *                 )
+ *                 @OA\Schema(ref="#/components/schemas/RentalStoreRequestSchema")
  *             }
  *         )
  *     ),
@@ -58,10 +52,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="object",
  *                     @OA\Property(property="id", type="integer", example=1),
- *                     @OA\Property(property="user_id", type="integer", example=2),
+ *                     @OA\Property(property="user_id", type="integer", example=1),
  *                     @OA\Property(property="book_id", type="integer", example=1),
- *                     @OA\Property(property="rented_at", type="date", example="2024-11-21"),
- *                     @OA\Property(property="due_date", type="date", example="2024-12-06"),
+ *                     @OA\Property(property="rented_at", type="date", example="2024-11-24"),
+ *                     @OA\Property(property="due_date", type="date", example="2024-11-30"),
  *                     @OA\Property(property="return_at", type="date", example="null"),
  *                     @OA\Property(property="created_at", type="date", example="2024-11-24T14:38:49.000000Z"),
  *                     @OA\Property(property="updated_at", type="date", example="2024-11-24T14:38:49.000000Z"),
@@ -86,13 +80,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *        @OA\RequestBody(
  *            @OA\JsonContent(
  *                allOf={
- *                    @OA\Schema(
- *                       @OA\Property(property="user_id", type="integer", example=2),
- *                       @OA\Property(property="book_id", type="integer", example=1),
- *                       @OA\Property(property="rented_at", type="date", example="2024-11-21"),
- *                       @OA\Property(property="due_date", type="date", example="2024-12-06"),
- *                       @OA\Property(property="return_at", type="date", example="null"),
- *                    )
+ *                    @OA\Schema(ref="#/components/schemas/RentalUpdateRequestSchema")
  *                }
  *            )
  *        ),
@@ -103,10 +91,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *            @OA\JsonContent(
  *                @OA\Property(property="data", type="object",
  *                      @OA\Property(property="id", type="integer", example=1),
- *                      @OA\Property(property="user_id", type="integer", example=2),
+ *                      @OA\Property(property="user_id", type="integer", example=1),
  *                      @OA\Property(property="book_id", type="integer", example=1),
- *                      @OA\Property(property="rented_at", type="date", example="2024-11-21"),
- *                      @OA\Property(property="due_date", type="date", example="2024-12-06"),
+ *                      @OA\Property(property="rented_at", type="date", example="2024-11-24"),
+ *                      @OA\Property(property="due_date", type="date", example="2024-11-30"),
  *                      @OA\Property(property="return_at", type="date", example="null"),
  *                      @OA\Property(property="created_at", type="date", example="2024-11-24T14:38:49.000000Z"),
  *                      @OA\Property(property="updated_at", type="date", example="2024-11-24T14:38:49.000000Z"),

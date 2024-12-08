@@ -22,7 +22,33 @@
                                     "properties": {
                                         "data": {
                                             "type": "array",
-                                            "items": {}
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "name"
+                                                    },
+                                                    "bio": {
+                                                        "type": "string",
+                                                        "example": "bio"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-11-24T14:38:49.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-11-24T14:38:49.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -66,11 +92,11 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "Some name"
+                                                    "example": "name"
                                                 },
                                                 "bio": {
                                                     "type": "string",
-                                                    "example": "Some bio"
+                                                    "example": "bio"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -125,11 +151,11 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "Some name"
+                                                    "example": "name"
                                                 },
                                                 "bio": {
                                                     "type": "string",
-                                                    "example": "Some bio"
+                                                    "example": "bio"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -213,17 +239,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "properties": {
-                                            "name": {
-                                                "type": "string",
-                                                "example": "Some some name"
-                                            },
-                                            "bio": {
-                                                "type": "string",
-                                                "example": "Some some bio"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/AuthorUpdateRequestSchema"
                                     }
                                 ]
                             }
@@ -245,11 +261,11 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "Some some name"
+                                                    "example": "name"
                                                 },
                                                 "bio": {
                                                     "type": "string",
-                                                    "example": "Some some bio"
+                                                    "example": "bio"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -410,22 +426,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "properties": {
-                                            "title": {
-                                                "type": "string",
-                                                "example": "Some title"
-                                            },
-                                            "author_id": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "published_at": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "2024-12-12"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/BookStoreRequestSchema"
                                     }
                                 ]
                             }
@@ -447,7 +448,7 @@
                                                 },
                                                 "title": {
                                                     "type": "string",
-                                                    "example": "Some title"
+                                                    "example": "title"
                                                 },
                                                 "author_id": {
                                                     "type": "integer",
@@ -604,22 +605,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "properties": {
-                                            "title": {
-                                                "type": "string",
-                                                "example": "Some some title"
-                                            },
-                                            "author_id": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "published_at": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "2024-12-12"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/BookUpdateRequestSchema"
                                     }
                                 ]
                             }
@@ -641,7 +627,7 @@
                                                 },
                                                 "title": {
                                                     "type": "string",
-                                                    "example": "Some some title"
+                                                    "example": "title"
                                                 },
                                                 "author_id": {
                                                     "type": "integer",
@@ -898,7 +884,7 @@
                                                     },
                                                     "user_id": {
                                                         "type": "integer",
-                                                        "example": 2
+                                                        "example": 1
                                                     },
                                                     "book_id": {
                                                         "type": "integer",
@@ -907,12 +893,12 @@
                                                     "rented_at": {
                                                         "type": "string",
                                                         "format": "date",
-                                                        "example": "2024-11-21"
+                                                        "example": "2024-11-24"
                                                     },
                                                     "due_date": {
                                                         "type": "string",
                                                         "format": "date",
-                                                        "example": "2024-12-06"
+                                                        "example": "2024-11-30"
                                                     },
                                                     "return_at": {
                                                         "type": "string",
@@ -953,32 +939,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "properties": {
-                                            "user_id": {
-                                                "type": "integer",
-                                                "example": 2
-                                            },
-                                            "book_id": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "rented_at": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "2024-11-21"
-                                            },
-                                            "due_date": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "2024-12-06"
-                                            },
-                                            "return_at": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "null"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/RentalStoreRequestSchema"
                                     }
                                 ]
                             }
@@ -1000,7 +961,7 @@
                                                 },
                                                 "user_id": {
                                                     "type": "integer",
-                                                    "example": 2
+                                                    "example": 1
                                                 },
                                                 "book_id": {
                                                     "type": "integer",
@@ -1009,12 +970,12 @@
                                                 "rented_at": {
                                                     "type": "string",
                                                     "format": "date",
-                                                    "example": "2024-11-21"
+                                                    "example": "2024-11-24"
                                                 },
                                                 "due_date": {
                                                     "type": "string",
                                                     "format": "date",
-                                                    "example": "2024-12-06"
+                                                    "example": "2024-11-30"
                                                 },
                                                 "return_at": {
                                                     "type": "string",
@@ -1065,32 +1026,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "properties": {
-                                            "user_id": {
-                                                "type": "integer",
-                                                "example": 2
-                                            },
-                                            "book_id": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "rented_at": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "2024-11-21"
-                                            },
-                                            "due_date": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "2024-12-06"
-                                            },
-                                            "return_at": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "null"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/RentalUpdateRequestSchema"
                                     }
                                 ]
                             }
@@ -1112,7 +1048,7 @@
                                                 },
                                                 "user_id": {
                                                     "type": "integer",
-                                                    "example": 2
+                                                    "example": 1
                                                 },
                                                 "book_id": {
                                                     "type": "integer",
@@ -1121,12 +1057,12 @@
                                                 "rented_at": {
                                                     "type": "string",
                                                     "format": "date",
-                                                    "example": "2024-11-21"
+                                                    "example": "2024-11-24"
                                                 },
                                                 "due_date": {
                                                     "type": "string",
                                                     "format": "date",
-                                                    "example": "2024-12-06"
+                                                    "example": "2024-11-30"
                                                 },
                                                 "return_at": {
                                                     "type": "string",
@@ -1326,13 +1262,13 @@
                     "published_at"
                 ],
                 "properties": {
-                    "name": {
+                    "title": {
                         "type": "string",
-                        "example": "name"
+                        "example": "title"
                     },
-                    "bio": {
-                        "type": "string",
-                        "example": "bio"
+                    "author_id": {
+                        "type": "integer",
+                        "example": 1
                     },
                     "published_at": {
                         "type": "string",
@@ -1348,13 +1284,13 @@
                     "published_at"
                 ],
                 "properties": {
-                    "name": {
+                    "title": {
                         "type": "string",
-                        "example": "name"
+                        "example": "title"
                     },
-                    "bio": {
-                        "type": "string",
-                        "example": "bio"
+                    "author_id": {
+                        "type": "integer",
+                        "example": 1
                     },
                     "published_at": {
                         "type": "string",
@@ -1481,6 +1417,35 @@
                     "return_at": {
                         "type": "string",
                         "example": "null"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "example": "2024-11-24T14:38:49.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResourceSchema": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "email"
+                    },
+                    "email_verified_at": {
+                        "type": "string",
+                        "example": "email_verified_at"
                     },
                     "created_at": {
                         "type": "string",

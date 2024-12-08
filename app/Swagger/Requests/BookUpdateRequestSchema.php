@@ -7,14 +7,14 @@ namespace App\Swagger\Requests;
 class BookUpdateRequestSchema
 {
     /**
-     * @OA\Property (example="name")
+     * @OA\Property (example="title")
      */
-    public string $name;
+    public string $title;
 
     /**
-     * @OA\Property (example="bio")
+     * @OA\Property (example=1)
      */
-    public string $bio;
+    public int $author_id;
 
     /**
      * @OA\Property (example="2024-11-24")
