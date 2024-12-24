@@ -14,7 +14,7 @@ Route::get('/user', function (Request $request) {
 Route::resource('authors', AuthorController::class);
 
 Route::get('authors/books/{author}',[AuthorController::class,'books']);
-
+//text
 Route::resource('books', BookController::class);
 
 Route::get('books/author/{book}',[BookController::class,'author']);
