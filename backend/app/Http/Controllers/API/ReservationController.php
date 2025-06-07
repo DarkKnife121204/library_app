@@ -49,7 +49,7 @@ class ReservationController extends Controller
         ], 201);
     }
 
-    public function updateStatus(ReservationUpdateStatusRequest $request, $id)
+    public function updateStatus(ReservationUpdateStatusRequest $request, $id): JsonResponse
     {
         $validated = $request->validated();
         $newStatus = $validated['status'];

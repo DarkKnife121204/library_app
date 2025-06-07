@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthLoginRequest;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -23,7 +24,9 @@ class AuthController extends Controller
             return response()->json(['error' => 'Неверные данные для входа'], 401);
         }
 
-        return response()->json(['message' => 'Вход выполнен успешно'], 200)->cookie('token', $token, 60*24);
+        $user = auth()->user();
+
+        return response()->json(new UserResource($user))->cookie('token', $token, 60*24);
     }
 
     public function logout(Request $request)

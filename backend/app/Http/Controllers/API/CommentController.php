@@ -26,12 +26,7 @@ class CommentController extends Controller
     {
         $validated = $request->validated();
 
-        $comment = Comment::create([
-            'user_id' => auth()->id(),
-            'book_id' => $validated['book_id'],
-            'rating' => $validated['rating'],
-            'content' => $validated['content'],
-        ]);
+        $comment = auth()->user()->comments()->create($validated);
 
         return response()->json([
             'message' => 'Комментарий добавлен',
