@@ -15,11 +15,11 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::middleware(['auth:api', 'role:admin'])->group(function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/user/{user}', [UserController::class, 'store']);
+    Route::get('/user', [UserController::class, 'index']);
+    Route::post('/user', [UserController::class, 'store']);
+    Route::get('/user/{user}', [UserController::class, 'show']);
+    Route::post('/user/{user}', [UserController::class, 'update']);
     Route::delete('/user/{user}', [UserController::class, 'destroy']);
-    Route::post('/user/password/{user}', [UserController::class, 'password']);
-    Route::post('/user/password/email/{user}', [UserController::class, 'email']);
 });
 
 Route::middleware(['auth:api', 'role:librarian'])->group(function () {
@@ -33,8 +33,8 @@ Route::middleware(['auth:api', 'role:librarian'])->group(function () {
 });
 
 Route::middleware(['auth:api', 'role:user'])->group(function () {
-    Route::get('/books', [UserController::class, 'index']);
-    Route::get('/book/{book}', [UserController::class, 'show']);
+    Route::get('/books', [BookController::class, 'index']);
+    Route::get('/book/{book}', [BookController::class, 'show']);
     Route::post('/reservation/{book}', [ReservationController::class, 'store']);
     Route::patch('/reservation/{book}', [ReservationController::class, 'update']);
     Route::post('/comment/{book}', [CommentController::class, 'update']);

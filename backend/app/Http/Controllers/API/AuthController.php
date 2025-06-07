@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthLoginRequest;
-use App\Http\Requests\AuthRegisterRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -14,14 +14,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    public function register(AuthRegisterRequest $request)
-    {
-        $validated = $request->validated();
-
-        User::create($validated);
-
-        return response()->json(['message' => 'Пользователь успешно зарегистрирован'], 201);
-    }
 
     public function login(AuthLoginRequest $request)
     {
