@@ -33,7 +33,8 @@ Route::middleware(['auth:api', 'role:user'])->group(function () {
     Route::get('/book', [BookController::class, 'index']);
     Route::get('/book/{book}', [BookController::class, 'show']);
     Route::post('/reservation', [ReservationController::class, 'reserve']);
-    Route::post('/comment/{book}', [CommentController::class, 'store']);
+    Route::get('/book/{book}/comment', [CommentController::class, 'show']);
+    Route::post('/comment', [CommentController::class, 'store']);
 });
 
 Route::middleware(['auth:api', 'role:user,librarian'])->group(function () {
