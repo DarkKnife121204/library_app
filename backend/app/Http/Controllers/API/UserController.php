@@ -13,14 +13,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class UserController extends Controller
 {
-    public function store(UserStoreRequest $request): JsonResponse
-    {
-        $validated = $request->validated();
-
-        User::create($validated);
-
-        return response()->json(['message' => 'Пользователь успешно зарегистрирован'], 201);
-    }
     public function index(): AnonymousResourceCollection
     {
         return UserResource::collection(User::all());
@@ -28,6 +20,14 @@ class UserController extends Controller
     public function show(User $user): UserResource
     {
         return UserResource::make($user);
+    }
+    public function store(UserStoreRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+
+        User::create($validated);
+
+        return response()->json(['message' => 'Пользователь успешно зарегистрирован'], 201);
     }
 
     public function update(UserUpdateRequest $request, User $user): UserResource
@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $user->delete();
         return response()->json([
-            'message' => 'User deleted successfully'
+            'message' => 'Пользователь успешно удален'
         ]);
     }
 }

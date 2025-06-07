@@ -11,7 +11,9 @@ class book extends Model
     protected $fillable = [
         'title',
         'author',
-        'is_available'
+        'is_available',
+        'genre',
+        'publisher'
     ];
     public function reservations(): HasMany
     {
