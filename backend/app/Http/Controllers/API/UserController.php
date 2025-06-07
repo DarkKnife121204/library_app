@@ -25,23 +25,31 @@ class UserController extends Controller
     {
         $validated = $request->validated();
 
-        User::create($validated);
+        $user = User::create($validated);
 
-        return response()->json(['message' => 'Пользователь успешно зарегистрирован'], 201);
+        return response()->json([
+            'message' => 'Пользователь успешно зарегистрирован',
+            'data' => new UserResource($user)
+        ], 201);
     }
 
-    public function update(UserUpdateRequest $request, User $user): UserResource
+    public function update(UserUpdateRequest $request, User $user): JsonResponse
     {
         $validated = $request->validated();
+
         $user->update($validated);
-        return new UserResource($user);
+
+        return response()->json([
+            'message' => 'Пользователь успешно обновлён',
+            'data' => new UserResource($user)
+        ], 200);
     }
 
     public function destroy(User $user): JsonResponse
     {
         $user->delete();
         return response()->json([
-            'message' => 'Пользователь успешно удален'
-        ]);
+            'message' => 'Пользователь успешно удалён'
+        ], 200);
     }
 }

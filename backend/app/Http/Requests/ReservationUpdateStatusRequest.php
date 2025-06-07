@@ -9,7 +9,7 @@ class ReservationUpdateStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => ['required','in:reserved,issued,returned,cancelled']
+            'status' => ['required','in:issued,returned,cancelled']
         ];
     }
 
@@ -17,7 +17,7 @@ class ReservationUpdateStatusRequest extends FormRequest
     {
         return [
             'status.required' => 'Status is required.',
-            'status.in' => 'Acceptable statuses: reserved, issued, returned, cancelled.'
+            'status.in' => 'Acceptable statuses: issued, returned, cancelled.'
         ];
     }
 }

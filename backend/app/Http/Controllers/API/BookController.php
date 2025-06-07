@@ -23,16 +23,20 @@ class BookController extends Controller
     {
         $validated = $request->validated();
 
-        Book::create($validated);
+        $book = Book::create($validated);
 
-        return response()->json(['message' => 'Книга успешно создана'], 201);
+        return response()->json([
+            'message' => 'Книга успешно создана',
+            'data' => new BookResource($book)
+        ], 201);
     }
 
     public function destroy(Book $book): JsonResponse
     {
         $book->delete();
+
         return response()->json([
             'message' => 'Книга успешно удалена'
-        ], 201);
+        ], 200);
     }
 }

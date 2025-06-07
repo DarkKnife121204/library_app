@@ -34,7 +34,7 @@ class ReservationController extends Controller
             return response()->json(['error' => 'Книга уже забронирована'], 409);
         }
 
-        Reservation::create([
+        $reservation = Reservation::create([
             'user_id'     => $user->id,
             'book_id'     => $book->id,
             'reserved_at' => now(),
@@ -43,23 +43,41 @@ class ReservationController extends Controller
 
         $book->update(['is_available' => false]);
 
-        return response()->json(['message' => 'Книга успешно забронирована'], 201);
+        return response()->json([
+            'message' => 'Книга успешно забронирована',
+            'data' => new ReservationResource($reservation)
+        ], 201);
     }
 
     public function updateStatus(ReservationUpdateStatusRequest $request, $id)
     {
         $validated = $request->validated();
         $newStatus = $validated['status'];
+
         $reservation = Reservation::with('book')->findOrFail($id);
+        $user = auth()->user();
 
         if (in_array($reservation->status, ['returned', 'cancelled'])) {
             return response()->json(['error' => 'Бронь уже завершена и не может быть изменена'], 400);
         }
 
+        $role = $user->role;
+
+        $rolePermissions = [
+            'user' => ['cancelled'],
+            'librarian' => ['issued', 'returned', 'cancelled'],
+        ];
+
+        if (!in_array($newStatus, $rolePermissions[$role] ?? [])) {
+            return response()->json(['error' => 'Недостаточно прав для установки этого статуса'], 403);
+        }
+
+
         match ($newStatus) {
             'issued'   => $reservation->issued_at = now(),
             'returned' => $reservation->returned_at = now(),
             default    => null,
+
         };
 
         if (in_array($newStatus, ['returned', 'cancelled'])) {
@@ -72,6 +90,6 @@ class ReservationController extends Controller
         return response()->json([
             'message' => 'Статус обновлён',
             'data'    => $reservation,
-        ], 201);
+        ], 200);
     }
 }

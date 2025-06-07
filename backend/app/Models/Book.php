@@ -15,6 +15,11 @@ class book extends Model
         'genre',
         'publisher'
     ];
+
+    protected $casts = [
+        'is_available' => 'boolean',
+    ];
+
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);

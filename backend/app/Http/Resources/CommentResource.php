@@ -7,13 +7,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'user_id' => $this->user_id,
+            'book_id' => $this->book_id,
+            'rating' => $this->rating,
+            'content' => $this->content
+        ];
     }
 }
