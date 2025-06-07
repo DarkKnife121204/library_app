@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         $user = auth()->user();
 
-        if (! $user || $user->role !== $role) {
+        if (! $user || ! in_array($user->role, $roles)) {
             return response()->json(['error' => 'Доступ запрещён'], 403);
         }
 

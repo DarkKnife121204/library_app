@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookStoreRequest;
-use App\Http\Requests\BookUpdateRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\JsonResponse;
@@ -34,6 +33,6 @@ class BookController extends Controller
         $book->delete();
         return response()->json([
             'message' => 'Книга успешно удалена'
-        ]);
+        ], 201);
     }
 }

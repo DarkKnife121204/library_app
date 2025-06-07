@@ -25,15 +25,17 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
 Route::middleware(['auth:api', 'role:librarian'])->group(function () {
     Route::post('/book', [BookController::class, 'store']);
     Route::delete('/book/{book}', [BookController::class, 'destroy']);
-    Route::get('/reservations', [ReservationController::class, 'index']);
+    Route::get('/reservation', [ReservationController::class, 'index']);
     Route::get('/reservation/{reservation}', [ReservationController::class, 'show']);
-    Route::patch('/reservation', [ReservationController::class, 'update']);
 });
 
 Route::middleware(['auth:api', 'role:user'])->group(function () {
     Route::get('/book', [BookController::class, 'index']);
     Route::get('/book/{book}', [BookController::class, 'show']);
-    Route::post('/reservation/{book}', [ReservationController::class, 'store']);
-    Route::patch('/reservation/{book}', [ReservationController::class, 'update']);
+    Route::post('/reservation', [ReservationController::class, 'reserve']);
     Route::post('/comment/{book}', [CommentController::class, 'store']);
+});
+
+Route::middleware(['auth:api', 'role:user,librarian'])->group(function () {
+    Route::patch('/reservation/{id}/status', [ReservationController::class, 'updateStatus']);
 });
