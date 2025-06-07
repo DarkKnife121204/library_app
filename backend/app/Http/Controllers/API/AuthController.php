@@ -50,9 +50,4 @@ class AuthController extends Controller
             return response()->json(['error' => 'Ошибка при выходе'], 500);
         }
     }
-
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
 }
