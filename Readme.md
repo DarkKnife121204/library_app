@@ -65,8 +65,8 @@
 ## Стек
 
 ### Backend (Laravel)
-- PHP 8.3+
-- Laravel 12+
+- PHP 
+- Laravel 
 - PostgreSQL
 - JWT 
 - Laravel Mail 
