@@ -11,7 +11,7 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => ['required','string'],
             'email' => ['required','email'],
-            'password' => ['required','string','min:6'],
+            'password' => ['required','string'],
             'role' => ['required','string'],
         ];
     }
@@ -25,7 +25,6 @@ class UserStoreRequest extends FormRequest
             'email.email' => 'Email is invalid',
             'password.required' => 'Password is required',
             'password.string' => 'Password must be a string',
-            'password.min' => 'Password must be at least 6 characters',
             'role.required' => 'Role is required',
             'role.string' => 'Role is string',
         ];

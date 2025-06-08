@@ -9,7 +9,7 @@ class UserPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' => ['required','string','min:6'],
+            'password' => ['required','string'],
         ];
     }
 
@@ -18,7 +18,6 @@ class UserPasswordRequest extends FormRequest
         return [
             'password.required' => 'Password is required.',
             'password.string' => 'Password is string.',
-            'password.min' => 'Password must be at least 6 characters.',
         ];
     }
 }
