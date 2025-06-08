@@ -11,7 +11,6 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => ['required','string'],
             'email' => ['required','email'],
-            'password' => ['required','string','min:6'],
             'role' => ['required','string'],
         ];
     }
@@ -23,9 +22,6 @@ class UserUpdateRequest extends FormRequest
             'name.string' => 'Name is string',
             'email.required' => 'Email is required',
             'email.email' => 'Email is invalid',
-            'password.required' => 'Password is required',
-            'password.string' => 'Password must be a string',
-            'password.min' => 'Password must be at least 6 characters',
             'role.required' => 'Role is required',
             'role.string' => 'Role is string',
         ];

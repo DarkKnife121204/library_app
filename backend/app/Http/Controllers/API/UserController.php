@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserPasswordRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
+use App\Mail\PasswordUpdated;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -43,6 +46,19 @@ class UserController extends Controller
             'message' => 'Пользователь успешно обновлён',
             'data' => new UserResource($user)
         ], 200);
+    }
+
+    public function setPassword(UserPasswordRequest $request, User $user): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $newPassword = $validated['password'];
+        $user->password = Hash::make($newPassword);
+        $user->save();
+
+        Mail::to($user->email)->send(new PasswordUpdated($newPassword, $user->name));
+
+        return response()->json(['message' => 'Пароль обновлён и отправлен на email'], 200);
     }
 
     public function destroy(User $user): JsonResponse

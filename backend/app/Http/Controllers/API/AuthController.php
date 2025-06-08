@@ -7,6 +7,7 @@ use App\Http\Requests\AuthLoginRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,15 @@ class AuthController extends Controller
 
         $user = auth()->user();
 
-        return response()->json(new UserResource($user))->cookie('token', $token, 60*24);
+        return response()->json([
+            'access_token' => $token,
+            'user' => new UserResource($user),
+        ]);
+    }
+
+    public function me(): UserResource
+    {
+        return new UserResource(auth()->user());
     }
 
     public function logout(Request $request)
