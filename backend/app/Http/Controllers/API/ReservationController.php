@@ -15,7 +15,9 @@ class ReservationController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return ReservationResource::collection(Reservation::all());
+        return ReservationResource::collection(
+            Reservation::with(['user', 'book'])->get()
+        );
     }
 
     public function show(Reservation $reservation): ReservationResource

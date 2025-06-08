@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\NotificationRequestController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\ReservationController;
@@ -32,13 +33,16 @@ Route::middleware(['auth:api', 'role:librarian'])->group(function () {
 });
 
 Route::middleware(['auth:api', 'role:user'])->group(function () {
-    Route::get('/books', [BookController::class, 'index'])->name('book.index');
-    Route::get('/book/{book}', [BookController::class, 'show'])->name('book.show');
     Route::post('/reservation', [ReservationController::class, 'reserve'])->name('reservation.reserve');
-    Route::get('/book/{book}/comment', [CommentController::class, 'show'])->name('comments.show');
+    Route::get('/user/{user}/reservations', [UserController::class, 'reservations'])->name('user.reservations');
+    Route::get('/book/{book}/comments', [CommentController::class, 'index'])->name('comments.index');
     Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('/notifyRequest', [NotificationRequestController::class, 'store'])->name('notification.store');
+    Route::delete('/notifyRequest', [NotificationRequestController::class, 'destroy'])->name('notification.destroy');
 });
 
 Route::middleware(['auth:api', 'role:user,librarian'])->group(function () {
+    Route::get('/books', [BookController::class, 'index'])->name('books.index');
+    Route::get('/book/{book}', [BookController::class, 'show'])->name('book.show');
     Route::patch('/reservation/{id}/status', [ReservationController::class, 'updateStatus'])->name('reservation.status');
 });

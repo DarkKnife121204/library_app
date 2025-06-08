@@ -11,7 +11,6 @@ class BookStoreRequest extends FormRequest
         return [
             'title' => ['required','string'],
             'author' => ['required','string'],
-            'is_available' => ['required','boolean'],
             'genre' => ['required','string'],
             'publisher' => ['required','string'],
         ];
@@ -24,8 +23,6 @@ class BookStoreRequest extends FormRequest
             'title.string' => 'Title must be string',
             'author.required' => 'Author is required',
             'author.string' => 'Author must be string',
-            'is_available.required' => 'Is available is required',
-            'is_available.boolean' => 'Is available must be boolean',
             'genre.required' => 'Genre is required',
             'genre.string' => 'Genre must be string',
             'publisher.required' => 'Publisher is required',

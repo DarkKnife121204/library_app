@@ -1,20 +1,22 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
 
-export default function CreateUserPage() {
+export default function CreateCommentPage() {
     const router = useRouter();
-
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [role, setRole] = useState("user");
     
+    const searchParams = useSearchParams();
+    const bookId = searchParams.get("book");
+
+    const [rating, setRating] = useState(1);
+    const [content, setContent] = useState("");
+
     const [authorized, setAuthorized] = useState(false);
 
     useEffect(() => {
-        const checkAdmin = async () => {
+        const checkUser = async () => {
             const token = Cookies.get("token");
             if (!token) return router.push("/");
 
@@ -27,37 +29,36 @@ export default function CreateUserPage() {
                 });
 
                 if (!res.ok) throw new Error("Unauthorized");
-
-                const data = await res.json();
-                const user = data.data;
-
-                if (user.role !== "admin") return router.push(`/${user.role}`);
-
                 setAuthorized(true);
             } catch {
                 router.push("/");
             }
         };
 
-        checkAdmin();
+        checkUser();
     }, [router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         const token = Cookies.get("token");
-        const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/user`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comment`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ name, email, password, role }),
+            body: JSON.stringify({
+                book_id: Number(bookId),
+                rating,
+                content,
+            }),
         });
 
         if (res.ok) {
-            router.push("/admin");
+            router.push(`/user/comments?book=${bookId}`);
         } else {
-            alert("Ошибка при создании пользователя");
+            alert("Ошибка при добавлении комментария");
         }
     };
 
@@ -78,61 +79,43 @@ export default function CreateUserPage() {
                 className="w-full max-w-lg bg-white p-8 rounded-xl shadow-lg space-y-6"
             >
                 <h2 className="text-3xl font-bold text-center text-gray-800">
-                    Создание пользователя
+                    Оставить комментарий
                 </h2>
 
                 <input
-                    type="text"
-                    placeholder="Имя"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    type="number"
+                    placeholder="Оценка (1–5)"
+                    value={rating}
+                    onChange={(e) => setRating(Number(e.target.value))}
+                    min={1}
+                    max={5}
                     className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                <textarea
+                    placeholder="Комментарий"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    rows={4}
                     className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-
-                <input
-                    type="password"
-                    placeholder="Пароль"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-
-                <select
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="w-full border border-gray-300 px-4 py-3 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                    <option value="user">Пользователь</option>
-                    <option value="admin">Администратор</option>
-                    <option value="librarian">Библиотекарь</option>
-                </select>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                     <button
                         type="submit"
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition"
                     >
-                        Создать
+                        Отправить
                     </button>
-
                     <button
                         type="button"
-                        onClick={() => router.push("/admin")}
+                        onClick={() => router.push(`/user/comments?book=${bookId}`)}
                         className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-md transition"
                     >
-                        Назад в панель
+                        Назад
                     </button>
                 </div>
             </form>
         </div>
     );
-      
 }

@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class comment extends Model
+class NotificationRequest extends Model
 {
-    protected $table = 'comments';
     protected $fillable = [
         'user_id',
         'book_id',
-        'rating',
-        'content',
+        'notified_at'
     ];
 
     public function user(): BelongsTo

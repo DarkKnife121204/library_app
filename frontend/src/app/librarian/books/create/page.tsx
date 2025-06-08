@@ -1,18 +1,15 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-export default function EditUserPage() {
+export default function CreateUserPage() {
     const router = useRouter();
 
-    const searchParams = useSearchParams();
-    const userId = searchParams.get("id");
-
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [role, setRole] = useState("user");
+    const [title, setTitle] = useState("");
+    const [author, setAuthor] = useState("");
+    const [genre, setGenre] = useState("");
+    const [publisher, setPublisher] = useState("");
     
     const [authorized, setAuthorized] = useState(false);
 
@@ -22,7 +19,7 @@ export default function EditUserPage() {
             if (!token) return router.push("/");
 
             try {
-                const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/me`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/me`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         Accept: "application/json",
@@ -34,7 +31,7 @@ export default function EditUserPage() {
                 const data = await res.json();
                 const user = data.data;
 
-                if (user.role !== "admin") return router.push(`/${user.role}`);
+                if (user.role !== "librarian") return router.push(`/${user.role}`);
 
                 setAuthorized(true);
             } catch {
@@ -42,46 +39,25 @@ export default function EditUserPage() {
             }
         };
 
-        const fetchUser = async () => {
-            const token = Cookies.get("token");
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/${userId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    Accept: "application/json",
-                },
-            });
-
-            if (res.ok) {
-                const data = await res.json();
-                const user = data.data;
-                setName(user.name);
-                setEmail(user.email);
-                setRole(user.role);
-            } else {
-                router.push("/admin");
-            }
-        };
-
         checkAdmin();
-        fetchUser();
-    }, [router, userId]);
+    }, [router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const token = Cookies.get("token");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/${userId}`, {
-            method: "PATCH",
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/book`, {
+            method: "POST",
             headers: {
-                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ name, email, role }),
+            body: JSON.stringify({ title, author, genre, publisher }),
         });
 
         if (res.ok) {
-            router.push("/admin");
+            router.push("/librarian");
         } else {
-            alert("Ошибка при обновлении пользователя");
+            alert("Ошибка при добавлении книги");
         }
     };
 
@@ -92,56 +68,62 @@ export default function EditUserPage() {
                     Загрузка...
                 </div>
             </div>
-        )
+        );
     }
 
     return (
         <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4 py-10">
             <form
                 onSubmit={handleSubmit}
-                className="w-full max-w-lg bg-white rounded-xl shadow-lg p-8 space-y-6"
+                className="w-full max-w-lg bg-white p-8 rounded-xl shadow-lg space-y-6"
             >
-                <h2 className="text-3xl font-bold text-gray-800 text-center">
-                    Редактирование пользователя
+                <h2 className="text-3xl font-bold text-center text-gray-800">
+                    Добавление книги
                 </h2>
 
                 <input
                     type="text"
-                    placeholder="Имя"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Название"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
                 <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    placeholder="Автор"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
                     className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
-                <select
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                    <option value="user">Пользователь</option>
-                    <option value="admin">Администратор</option>
-                    <option value="librarian">Библиотекарь</option>
-                </select>
+                <input
+                    type="text"
+                    placeholder="Жанр"
+                    value={genre}
+                    onChange={(e) => setGenre(e.target.value)}
+                    className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <input
+                    type="text"
+                    placeholder="Издатель"
+                    value={publisher}
+                    onChange={(e) => setPublisher(e.target.value)}
+                    className="w-full border border-gray-300 px-4 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
 
                 <div className="flex flex-col sm:flex-row gap-4">
                     <button
                         type="submit"
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition"
                     >
-                        Обновить
+                        Добавить
                     </button>
 
                     <button
                         type="button"
-                        onClick={() => router.push("/admin")}
+                        onClick={() => router.push("/librarian")}
                         className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-md transition"
                     >
                         Назад в панель
@@ -150,4 +132,5 @@ export default function EditUserPage() {
             </form>
         </div>
     );
+
 }

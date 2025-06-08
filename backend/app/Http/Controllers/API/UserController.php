@@ -8,6 +8,8 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Mail\PasswordUpdated;
+use App\Models\Rental;
+use App\Models\reservation;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -67,5 +69,10 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Пользователь успешно удалён'
         ], 200);
+    }
+
+    public function reservations(User $User): JsonResponse
+    {
+        return response()->json($User->reservations);
     }
 }

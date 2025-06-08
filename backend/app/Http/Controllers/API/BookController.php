@@ -7,13 +7,27 @@ use App\Http\Requests\BookStoreRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): JsonResponse
     {
-        return BookResource::collection(Book::all());
+        $query = Book::query();
+
+        if ($request->has('author')) {
+            $query->where('author', 'like', '%' . $request->author . '%');
+        }
+        if ($request->has('genre')) {
+            $query->where('genre', 'like', '%' . $request->genre . '%');
+        }
+        if ($request->has('publisher')) {
+            $query->where('publisher', 'like', '%' . $request->publisher . '%');
+        }
+
+        return response()->json([
+            'data' => $query->get(),
+        ]);
     }
     public function show(Book $book): BookResource
     {

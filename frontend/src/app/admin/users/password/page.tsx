@@ -5,10 +5,12 @@ import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 
 export default function ResetPasswordPage() {
-    const searchParams = useSearchParams()
     const router = useRouter()
+
+    const searchParams = useSearchParams()
     const userId = searchParams.get('id')
     const [password, setPassword] = useState('')
+
     const [authorized, setAuthorized] = useState(false)
 
     useEffect(() => {
@@ -68,7 +70,7 @@ export default function ResetPasswordPage() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
                 <div className="p-6 bg-white shadow-md rounded text-center text-gray-800">
-                    Проверка доступа...
+                    Загрузка...
                 </div>
             </div>
         )

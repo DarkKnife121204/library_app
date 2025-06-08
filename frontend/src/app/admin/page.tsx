@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 interface User {
     id: number;
@@ -13,6 +13,7 @@ interface User {
 
 export default function AdminPage() {
     const router = useRouter();
+    
     const [user, setUser] = useState<User | null>(null);
     const [users, setUsers] = useState<User[]>([]);
 
@@ -78,13 +79,31 @@ export default function AdminPage() {
         } catch (error) {
             alert("Произошла ошибка при удалении пользователя.");
         }
-      };
+    };
+
+
+    const handleLogout = async () => {
+        const token = Cookies.get("token");
+
+        if (!token) return;
+
+        await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/logout`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: "application/json",
+            },
+        });
+
+        Cookies.remove("token");
+        window.location.href = "/";
+    };
 
     if (!user) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
                 <div className="p-6 bg-white shadow-md rounded text-center text-gray-800">
-                    Загрузка...
+                    Проверка доступа...
                 </div>
             </div>
         );
@@ -97,6 +116,12 @@ export default function AdminPage() {
                     <h2 className="text-4xl font-bold mb-2">Панель администратора</h2>
                     <p className="text-xl">Добро пожаловать, <strong>{user.name}</strong>!</p>
                 </div>
+                <button
+                    className="ml-auto bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded font-semibold"
+                    onClick={handleLogout}
+                >
+                    Выйти
+                </button>
 
                 <div className="flex items-center justify-between">
                     <h3 className="text-2xl font-semibold pl-2 pt-2">Пользователи</h3>
