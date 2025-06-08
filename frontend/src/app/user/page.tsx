@@ -32,7 +32,11 @@ export default function UserDashboard() {
 
     const [showBooks, setShowBooks] = useState(true);
 
-    const [user, setUser] = useState<{ name: string; role: string; id: number } | null>(null);
+    const [user, setUser] = useState<{ name: string; role: string; id: number }>({
+        name: "",
+        role: "",
+        id: 0,
+      });
 
     const [filterAuthor, setFilterAuthor] = useState("");
     const [filterGenre, setFilterGenre] = useState("");
@@ -61,7 +65,7 @@ export default function UserDashboard() {
                 if (user.role !== "user") return router.push(`/${user.role}`);
                 setUser(user);
                 fetchBooks();
-                fetchReservations();
+                fetchReservations(user.id);
             } catch {
                 router.push("/");
             }
@@ -93,17 +97,15 @@ export default function UserDashboard() {
         }
     };
 
-    const fetchReservations = async () => {
+    const fetchReservations = async (userId: number) => {
         const token = Cookies.get("token");
-        if (!user) return;
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/${user.id}/reservations`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/${userId}/reservations`, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 Accept: "application/json",
             },
         });
-
         if (res.ok) {
             const data = await res.json();
             setReservations(data);
@@ -112,7 +114,6 @@ export default function UserDashboard() {
 
     const handleReserve = async (id: number) => {
         const token = Cookies.get("token");
-        if (!token) return;
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reservation`, {
             method: "POST",
@@ -125,10 +126,8 @@ export default function UserDashboard() {
 
         if (res.ok) {
             alert("Книга успешно забронирована");
-            setBooks((prev) =>
-                prev.map((b) => (b.id === id ? { ...b, is_available: false } : b))
-            );
-            fetchReservations();
+            fetchBooks();
+            fetchReservations(user.id);
         } else {
             alert("Не удалось забронировать книгу");
         }

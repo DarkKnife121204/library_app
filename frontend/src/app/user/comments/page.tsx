@@ -7,7 +7,7 @@ interface Comment {
     id: number;
     user_id: number;
     book_id: number;
-    rating: number; // 👈 добавить
+    rating: number;
     content: string;
     created_at: string;
     user?: {
@@ -51,9 +51,7 @@ export default function CommentsPage() {
 
     const fetchComments = async () => {
         const token = Cookies.get("token");
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/book/${bookId}/comments`,
-            {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/book/${bookId}/comments`,{
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: "application/json",
@@ -114,14 +112,8 @@ export default function CommentsPage() {
                                     <tr key={comment.id} className="border-t">
                                         <td className="p-2">{comment.rating ?? "—"}</td>
                                         <td className="p-2">{comment.content ?? "—"}</td>
-                                        <td className="p-2">{comment.user?.name || `#${comment.user_id}`}</td>
-                                        <td className="p-2">
-                                            {new Date(comment.created_at).toLocaleString("ru-RU", {
-                                                day: "2-digit",
-                                                month: "2-digit",
-                                                year: "numeric",
-                                            })}
-                                        </td>
+                                        <td className="p-2">{comment.user?.name}</td>
+                                        <td className="p-2">{comment.created_at}</td>
                                     </tr>
                                 ))}
                             </tbody>

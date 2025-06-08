@@ -13,7 +13,11 @@ class CommentResource extends JsonResource
             'user_id' => $this->user_id,
             'book_id' => $this->book_id,
             'rating' => $this->rating,
-            'content' => $this->content
+            'content' => $this->content,
+            'created_at'=>$this->created_at->format('d.m.Y H:i'),
+            'user'       => [
+                'name' => optional($this->user)->name,
+            ],
         ];
     }
 }

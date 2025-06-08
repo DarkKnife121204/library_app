@@ -18,7 +18,7 @@ class CommentController extends Controller
         $comments = $book->comments()->with('user')->get();
 
         return response()->json([
-            'data' => $comments
+            'data' => CommentResource::collection($comments)
         ]);
     }
 
